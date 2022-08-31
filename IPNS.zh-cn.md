@@ -17,7 +17,7 @@ IPFS 依托内容寻址数据，相应它是不变的: 修改一个对象也会�
 # 内容列表
 
 - [介绍](#介绍)
-- [IPNS 记录](#ipns记录)
+- [IPNS记录](#ipns记录)
 - [协议](#协议)
 - [概况](#概况)
 - [API规范](#API规范)
@@ -25,9 +25,10 @@ IPFS 依托内容寻址数据，相应它是不变的: 修改一个对象也会�
 
 ## 介绍
 
-Each time a file is modified, its content address changes. As a consequence, the address previously used for getting that file needs to be updated by who is using it. As this is not practical, IPNS was created to solve the problem.
+每次修改一个文件，它的内容寻址会变化。结果导致使用该文件的人需要更换地址。由此很不实用, IPNS被创建以解决该问题。
 
-IPNS is based on [SFS](http://en.wikipedia.org/wiki/Self-certifying_File_System). It consists of a PKI namespace, where a name is simply the hash of a public key. As a result, whoever controls the private key has full control over the name. Accordingly, records are signed by the private key and then distributed across the network (in IPFS, via the routing system). This is an egalitarian way to assign mutable names on the Internet at large, without any centralization whatsoever, or certificate authorities.
+IPNS 基于了 [SFS](http://en.wikipedia.org/wiki/Self-certifying_File_System)。它包括 PKI 命名空间，其名称是public key的哈希。
+由此，控制 private key 的人就可以完全控制文件地址。相应的，记录是用 private key 来签发，and then distributed across the network (in IPFS, via the routing system). This is an egalitarian way to assign mutable names on the Internet at large, without any centralization whatsoever, or certificate authorities.
 
 ## IPNS记录
 
