@@ -16,12 +16,12 @@ IPFS 依托内容寻址数据，相应它是不变的: 修改一个对象也会�
 
 # 内容列表
 
-- [Introduction](#introduction)
-- [IPNS Record](#ipns-record)
-- [Protocol](#protocol)
-- [Overview](#overview)
-- [API Spec](#api-spec)
-- [Integration with IPFS](#integration-with-ipfs)
+- [介绍](#介绍)
+- [IPNS 记录](#ipns-record)
+- [协议l](#协议)
+- [概况](#overview)
+- [API规范](#api-spec)
+- [IPFS集成](#integration-with-ipfs)
 
 ## 介绍
 
