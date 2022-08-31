@@ -96,30 +96,27 @@ message Message {
 
 ## Bitswap 1.1.0 版
 
-Bitswap 1.1.0 introduces a 'payload' field to the protobuf message and deprecates the
-existing 'blocks' field. The 'payload' field is an array of pairs of cid
-prefixes and block data. The cid prefixes are used to ensure the correct
-codecs and hash functions are used to handle the block on the receiving
-end.
+Bitswap 1.1.0 在protobuf消息对象中引入了 'payload' 字段， 并废弃了已有的'blocks' 字段。
+'payload' 字段是一个cid和块数据对的数组。包含cid前缀的目的是确保在接收端处理块数据时用了正确的编码和哈希函数。
 
-It is otherwise identical to 1.0.0
+其他部分与1.0.0版相同。
 
-### Bitswap 1.1.0: Wire Format
+### Bitswap 1.1.0: 网络报文格式
 
 ```protobuf
 message Message {
     message Entry {
-      bytes block = 1; // CID of the block
-      int32 priority = 2; // the priority (normalized). default to 1
-      bool cancel = 3; // whether this revokes an entry
+      bytes block = 1; // 块CID
+      int32 priority = 2; // 归一化的优先级，默认为1
+      bool cancel = 3; // 是否取消该块
     }
 
-    repeated Entry entries = 1; // a list of wantlist entries
-    bool full = 2; // whether this is the full wantlist. default to false
+    repeated Entry entries = 1; // 块清单
+    bool full = 2; // 是否是完整的wantlist。默认为 false
   }
 
   message Block {
-    bytes prefix = 1; // CID prefix (all of the CID components except for the digest of the multihash)
+    bytes prefix = 1; // CID 前缀 (CID数据结构中除了multihash摘要之外的部分)
     bytes data = 2;
   }
 
@@ -128,7 +125,7 @@ message Message {
 }
 ```
 
-## Bitswap 1.2.0
+## Bitswap 1.2.0 版
 
 Bitswap 1.2.0 extends the Bitswap 1.1.0 protocol with the three changes:
 1. Being able to ask if a peer has the data, not just to send the data
