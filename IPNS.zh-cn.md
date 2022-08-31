@@ -18,7 +18,7 @@ IPFS 依托内容寻址数据，相应它是不变的: 修改一个对象也会�
 
 - [介绍](#介绍)
 - [IPNS 记录](#ipns-record)
-- [协议l](#协议)
+- [协议](#协议)
 - [概况](#overview)
 - [API规范](#api-spec)
 - [IPFS集成](#integration-with-ipfs)
@@ -75,7 +75,7 @@ message IpnsEntry {
 }
 ```
 
-## Protocol
+## 协议
 
 Taking into consideration a p2p network, each peer should be able to publish IPNS records to the network, as well as to resolve the IPNS records published by other peers.
 
@@ -95,7 +95,7 @@ Finally, the network nodes may also republish their records, so that the records
 
 ![](img/ipns-overview.png)
 
-## API Spec
+## API 规范
 
   - [API_CORE](https://github.com/ipfs/specs/blob/master/API_CORE.md)
 
@@ -104,7 +104,7 @@ Finally, the network nodes may also republish their records, so that the records
   - [js-ipfs](https://github.com/ipfs/js-ipfs/tree/master/packages/ipfs-core/src/ipns)
   - [go-namesys](https://github.com/ipfs/go-namesys)
 
-## Integration with IPFS
+## IPFS集成
 
 #### Local record
 
