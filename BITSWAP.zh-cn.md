@@ -165,11 +165,11 @@ message Message {
       bool sendDontHave = 5; // Note: 默认为 false
     }
 
-    repeated Entry entries = 1; // a list of wantlist entries
-    bool full = 2; // whether this is the full wantlist. default to false
+    repeated Entry entries = 1; // 块清单 wantlist
+    bool full = 2; // 是否为完整清单 wantlist. 默认为 false
   }
   message Block {
-    bytes prefix = 1; // CID prefix (all of the CID components except for the digest of the multihash)
+    bytes prefix = 1; // CID 前缀 (CID 数据结构除multihash摘要以为部分)
     bytes data = 2;
   }
 
@@ -189,7 +189,7 @@ message Message {
 }
 ```
 
-## Implementations
+## Implementations 协议实现
 
 - <https://github.com/ipfs/go-bitswap>
 - <https://github.com/ipfs/js-ipfs-bitswap>
