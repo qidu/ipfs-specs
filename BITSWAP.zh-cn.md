@@ -136,18 +136,18 @@ Bitswap 1.2.0 版通过3个改变扩展了 1.1.0 协议:
 
 假设客户端 C 想要从服务端 S 请求数据:
 
-1. C opens a stream `s_want` to S and sends a message for the blocks it wants
-    1. C may either send a complete wantlist, or an update to an outstanding wantlist
-    2. C may reuse this stream to send new wants
-    3. For each of the items in the wantlist C may ask if S has the block (i.e. a Have request) or for S to send the block (i.e. a block request). C may also ask S to send back a DontHave message in the event it doesn't have the block
-2. S responds back on a stream `s_receive`. S may reuse this stream to send back subsequent responses
-    1. If C sends S a Have request for data S has (and is willing to give to C) it should respond with a Have, although it may instead respond with the block itself (e.g. if the block is very small)
-    2. If C sends S a Have request for data S does not have (or has but is not willing to give to C) and C has requested for DontHave responses then S should respond with DontHave
-    3. S may choose to include the number of bytes that are pending to be sent to C in the response message
-    4. S should respect the relative priority of wantlist requests from C, with wants that have higher `priority` values being responded to first.
-3. When C no longer needs a block it previously asked for it should send a Cancel message for that request to any peers that have not already responded about that particular block. It should particularly send Cancel messages for Block requests (as opposed to Have requests) that have not yet been answered.
+1. C 打开连接到 S 的流 `s_want`，发送包括自己需要的块的一个消息
+    1. C 可以发送完整的 wantlist，也可以针对已有的 wantlist 变化部分
+    2. C 可以复用流来发送新的需求
+    3. 对 wantlist 中每一个块，C 可以询问 S 是否拥有这个块 block (如用 Have 请求) ，或请 S 发送这个块 (如用块请求)。C 也可以请 S 回应 一个 DontHave 消息表示对端没有这个块
+2. S 用 `s_receive` 流来响应。 S 可以复用这个流以响应后续的请求
+    1. 如果 C 向 S 发送一个 Have 请求，S 有这个数据 (它也愿意发给 C) 就响应一个 Have 回复，当然它也可以直接回应块数据本身 (如果块并不大的话)
+    2. 如果 C 向 S 发送一个 Have 请求，S 不拥有这个数据 (或它有但不想发给 C) 且 C 要求进行 DontHave 回复，那么 S 应该回复 DontHave
+    3. S 可以选择将等待发送的字节数量也放在响应消息中
+    4. S 应该尊重 C 的请求清单中描述的相对优先级，更高 `priority` 值的块应该被优先响应
+3. 当 C 不再需要一个之前请求的块时，它应该发送一个块的 Cancel 消息到所有请求过但还没响应的对端。它特别应该为没响应的块发送这个 Cancel 请求 (与 Have 请求相反) 
 
-### Bitswap 1.2.0: Wire Format
+### Bitswap 1.2.0: 网络报文格式
 
 ```protobuf
 message Message {
@@ -158,11 +158,11 @@ message Message {
     }
 
     message Entry {
-      bytes block = 1; // CID of the block
-      int32 priority = 2; // the priority (normalized). default to 1
-      bool cancel = 3; // whether this revokes an entry
-      WantType wantType = 4; // Note: defaults to enum 0, ie Block
-      bool sendDontHave = 5; // Note: defaults to false
+      bytes block = 1; // 块CID
+      int32 priority = 2; // 归一化的优先级，默认为1
+      bool cancel = 3; // 是否取消这个块
+      WantType wantType = 4; // Note: 默认为 0, 即 Block
+      bool sendDontHave = 5; // Note: 默认为 false
     }
 
     repeated Entry entries = 1; // a list of wantlist entries
