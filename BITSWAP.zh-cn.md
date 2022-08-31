@@ -127,14 +127,14 @@ message Message {
 
 ## Bitswap 1.2.0 版
 
-Bitswap 1.2.0 extends the Bitswap 1.1.0 protocol with the three changes:
-1. Being able to ask if a peer has the data, not just to send the data
-2. A peer can respond that it does not have some data rather than just not responding
-3. Nodes can indicate on messages how much data they have queued to send to the peer they are sending the message to
+Bitswap 1.2.0 版通过3个改变扩展了 1.1.0 协议:
+1. 可以询问对端是否有某个数据块，而不只是请求获取它。
+2. 对端可以明确回复自己没有那些块，而不只是不响应。
+3. 节点可以在回复的消息中标示自己缓存了多少数据待发送。
 
-### Bitswap 1.2.0: Interaction Pattern
+### Bitswap 1.2.0: 交互模式
 
-Given that a client C wants to fetch data from some server S:
+假设客户端 C 想要从服务端 S 请求数据:
 
 1. C opens a stream `s_want` to S and sends a message for the blocks it wants
     1. C may either send a complete wantlist, or an update to an outstanding wantlist
