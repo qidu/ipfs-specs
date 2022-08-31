@@ -17,11 +17,11 @@ IPFS 依托内容寻址数据，相应它是不变的: 修改一个对象也会�
 # 内容列表
 
 - [介绍](#介绍)
-- [IPNS 记录](#ipns-record)
+- [IPNS 记录](#ipns记录)
 - [协议](#协议)
-- [概况](#overview)
-- [API规范](#api-spec)
-- [IPFS集成](#integration-with-ipfs)
+- [概况](#概况)
+- [API规范](#API规范)
+- [IPFS集成](#IPFS集成)
 
 ## 介绍
 
@@ -29,7 +29,7 @@ Each time a file is modified, its content address changes. As a consequence, the
 
 IPNS is based on [SFS](http://en.wikipedia.org/wiki/Self-certifying_File_System). It consists of a PKI namespace, where a name is simply the hash of a public key. As a result, whoever controls the private key has full control over the name. Accordingly, records are signed by the private key and then distributed across the network (in IPFS, via the routing system). This is an egalitarian way to assign mutable names on the Internet at large, without any centralization whatsoever, or certificate authorities.
 
-## IPNS Record
+## IPNS记录
 
 An IPNS record is a data structure containing the following fields:
 
@@ -91,11 +91,11 @@ As soon as the node has the most recent record, the signature and the validity m
 
 Finally, the network nodes may also republish their records, so that the records in the network continue to be valid to the other nodes.
 
-## Overview
+## 概况
 
 ![](img/ipns-overview.png)
 
-## API 规范
+## API规范
 
   - [API_CORE](https://github.com/ipfs/specs/blob/master/API_CORE.md)
 
