@@ -48,19 +48,18 @@ IPNS 基于了 [SFS](http://en.wikipedia.org/wiki/Self-certifying_File_System)�
   - 提过private key签名连接值。
   - 注意: 一旦我们增加有效性类型，需要修改签名。更多信息在 [ipfs/notes#249](https://github.com/ipfs/notes/issues/249)
 - 5. **Sequence** (uint64)
-  - Represents the current version of the record (starts at 0)
+  - 表达当前记录的版本 (从0开始)
 - 6. **Public Key** (bytes)
-  - Public key used to sign this record
-  - Note: The public key **must** be included if it cannot be extracted from the peer ID (reference [libp2p/specs#100](https://github.com/libp2p/specs/pull/100/files)).
+  - 前面记录的公钥（Public key）
+  - 注意: 如果不能从Peer ID中解析出的话就**必须**包含公钥 (参考 [libp2p/specs#100](https://github.com/libp2p/specs/pull/100/files)).
 - 7. **ttl** (uint64)
-  - A hint for how long the record should be cached before going back to, for instance the DHT, in order to check if it has been updated.
+  - 一个提示记录可以缓存多久的线索，例如在 DHT 中，用来检查记录是否需要更新。
 
-These records are stored locally, as well as spread across the network, in order to be accessible to everyone. For storing this structured data, we use [Protocol Buffers](https://github.com/google/protobuf), which is a language-neutral, platform neutral extensible mechanism for serializing structured data.
-
+这些记录在本地缓存，也分布在网络中以让每个人都访问到。为保持这样的数据结构，我们用 [Protocol Buffers](https://github.com/google/protobuf), 它是语言无关、平台无关、有扩展机制的序列化数据结构。 
 ```
 message IpnsEntry {
 	enum ValidityType {
-		// setting an EOL says "this record is valid until..."
+		// 设置该记录生命周期结束的时间
 		EOL = 0;
 	}
 	required bytes value = 1;
