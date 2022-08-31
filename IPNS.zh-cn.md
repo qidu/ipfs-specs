@@ -28,24 +28,25 @@ IPFS 依托内容寻址数据，相应它是不变的: 修改一个对象也会�
 每次修改一个文件，它的内容寻址会变化。结果导致使用该文件的人需要更换地址。由此很不实用, IPNS被创建以解决该问题。
 
 IPNS 基于了 [SFS](http://en.wikipedia.org/wiki/Self-certifying_File_System)。它包括 PKI 命名空间，其名称是public key的哈希。
-由此，控制 private key 的人就可以完全控制文件地址。相应的，记录是用 private key 来签发，and then distributed across the network (in IPFS, via the routing system). This is an egalitarian way to assign mutable names on the Internet at large, without any centralization whatsoever, or certificate authorities.
+由此，控制 private key 的人就可以完全控制文件地址。相应的，记录是用 private key 来签发，然后通过网络分发(在IPFS中通过routing系统)。 
+这是一个来通过Internet但不依靠中心化和认证机构就能分配可变文件名的平等方式。
 
 ## IPNS记录
 
-An IPNS record is a data structure containing the following fields:
+一个IPNS记录是包含如下字段的数据结构:
 
 - 1. **Value** (bytes)
-  - It can be any path, such as a path to another IPNS record, a `dnslink` path (eg. `/ipns/example.com`) or an IPFS path (eg. `/ipfs/Qm...`)
+  - 它可以包含任意路径，包括指向其他IPNS记录的路径，`dnslink` 路径 (eg. `/ipns/example.com`) 或 IPFS 路径 (eg. `/ipfs/Qm...`)
 - 2. **Validity** (bytes)
-  - Expiration date of the record using [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) with nanoseconds precision.
-  - Note: Currently, the expiration date is the only available type of validity.
+  - 记录过期方式采用有纳秒精度的[RFC3339](https://www.ietf.org/rfc/rfc3339.txt) 
+  - 注意: 目前过期时间是唯一可用于证明有效性的字段。
 - 3. **Validity Type** (uint64)
-   - Allows us to define the conditions under which the record is valid.
-   - Only supports expiration date with `validityType = 0` for now.
+   - 允许我们定义记录的有效性条件。
+   - 目前只支持用 `validityType = 0` 打开有效期认证。
 - 4. **Signature** (bytes)
-  - Concatenate value, validity field and validity type
-  - Sign the concatenation result with the provided private key
-  - Note: Once we add new validity types, the signature must be changed. More information on [ipfs/notes#249](https://github.com/ipfs/notes/issues/249)
+  - 连接值，包括有效性字段、类型。
+  - 提过private key签名连接值。
+  - 注意: 一旦我们增加有效性类型，需要修改签名。更多信息在 [ipfs/notes#249](https://github.com/ipfs/notes/issues/249)
 - 5. **Sequence** (uint64)
   - Represents the current version of the record (starts at 0)
 - 6. **Public Key** (bytes)
